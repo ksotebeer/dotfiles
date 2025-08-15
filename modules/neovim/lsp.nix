@@ -12,7 +12,7 @@
           
           -- Configure diagnostics to show automatically
           vim.diagnostic.config({
-            virtual_text = true,  -- Show diagnostics inline (like VSCode)
+            virtual_text = false,  -- Show diagnostics inline (like VSCode)
             signs = true,         -- Show signs in gutter (E, W, H, I)
             underline = true,     -- Underline errors
             update_in_insert = false,  -- Don't update while typing
@@ -40,6 +40,9 @@
               vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
               vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
               vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, opts)
+              vim.keymap.set('n', '<leader>d', function()
+                vim.diagnostic.open_float(0, { scope = 'line' })
+              end, { desc = "Open diagnostic float" })
             end,
           })
           

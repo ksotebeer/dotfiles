@@ -16,6 +16,7 @@
     tldr          # Simplified man pages
     
     # Development tools
+    nodejs_22     # Node.js (needed for claude and other tools)
     gh            # GitHub CLI
     lazygit       # Terminal UI for git
     httpie        # Better curl for APIs
