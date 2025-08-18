@@ -16,9 +16,9 @@
       vpndown = "sudo wg-quick down wg5";
       claude = "/Users/keegansotebeer/.claude/local/claude";
       
-      # Better ls with eza (no icons for now)
+      # Better ls with eza
       ls = "eza";
-      ll = "eza -l";  # Replaces old "ls -alF --color"
+      ll = "eza -l";
       la = "eza -la";
       lt = "eza --tree";
       
@@ -176,3 +176,4 @@
     enableZshIntegration = true;
   };
 }
+

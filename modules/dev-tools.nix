@@ -14,22 +14,16 @@
     htop          # Better top
     btop          # Even better system monitor
     tldr          # Simplified man pages
+    tree          # File tree viewer
     
     # Development tools
     nodejs_22     # Node.js (needed for claude and other tools)
     gh            # GitHub CLI
-    lazygit       # Terminal UI for git
-    httpie        # Better curl for APIs
-    watchman      # File watching
     
     # Nix tools
     nix-tree      # Visualize nix dependencies
     nix-diff      # Compare nix derivations
     nixpkgs-fmt   # Format nix files
-    
-    # Container tools
-    docker
-    docker-compose
     
     # Network tools
     curl
@@ -64,7 +58,7 @@
       };
     };
     
-    # eza will be aliased in shell.nix to avoid conflicts
+    # eza will be aliased in terminal.nix to avoid conflicts
     
     # zoxide configuration
     zoxide = {
@@ -76,3 +70,4 @@
     };
   };
 }
+

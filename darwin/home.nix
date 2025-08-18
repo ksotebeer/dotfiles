@@ -5,6 +5,8 @@
   imports = [
     ../modules/neovim
     ../modules/terminal.nix
+    ../modules/tmux.nix
+    ../modules/fonts.nix
     ../modules/git.nix
     ../modules/dev-tools.nix
   ];
