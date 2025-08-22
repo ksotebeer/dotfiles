@@ -95,6 +95,7 @@
         type = "lua";
         config = ''
           local cmp = require('cmp')
+          local luasnip = require('luasnip')
           
           cmp.setup({
             snippet = {
@@ -105,9 +106,25 @@
             mapping = cmp.mapping.preset.insert({
               ['<Tab>'] = cmp.mapping.select_next_item(),
               ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+              ['C-u>'] = cmp.mapping.scroll_docs(-4),
+              ['C-d>'] = cmp.mapping.scroll_docs(4),
               ['<CR>'] = cmp.mapping.confirm({ select = true }),
               ['<C-Space>'] = cmp.mapping.complete(),
               ['<C-e>'] = cmp.mapping.abort(),
+              ['<C-f>'] = cmp.mapping(function(fallback)
+                if luasnip.jumpable(1) then
+                  luasnip.jump(1)
+                else
+                  fallback()
+                end
+              end, {'i', 's'}),
+              ['<C-b>'] = cmp.mapping(function(fallback)
+                if luasnip.jumpable(-1) then
+                  luasnip.jump(-1)
+                else
+                  fallback()
+                end
+              end, {'i', 's'}),
             }),
             sources = {
               { name = 'nvim_lsp' },
