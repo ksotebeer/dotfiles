@@ -68,105 +68,12 @@
   # Starship prompt - Minimal Pure-inspired config
   programs.starship = {
     enable = true;
-    settings = {
-      # Clean, minimal format
-      format = ''
-        $directory$git_branch$git_status$nix_shell
-        $character
-      '';
-      
-      # Add a blank line between prompts for breathing room
-      add_newline = true;
-      
-      # Directory - short and sweet
-      directory = {
-        style = "blue bold";
-        truncation_length = 3;
-        truncate_to_repo = true;
-        format = "[$path]($style) ";
-      };
-      
-      # Git branch - simple
-      git_branch = {
-        style = "bright-black";
-        format = "[$branch]($style) ";
-      };
-      
-      # Git status - only the essentials
-      git_status = {
-        style = "red";
-        format = "[$modified$staged$untracked]($style)";
-        modified = "✗";
-        staged = "✓";
-        untracked = "?";
-        diverged = "";
-        conflicted = "";
-        ahead = "";
-        behind = "";
-        stashed = "";
-        renamed = "";
-        deleted = "";
-      };
-      
-      # Character - simple prompt
-      character = {
-        success_symbol = "[❯](purple)";
-        error_symbol = "[❯](red)";
-        vicmd_symbol = "[❮](green)";  # For vim mode if you use it
-      };
-      
-      # Only show nix-shell when active
-      nix_shell = {
-        symbol = "";
-        style = "cyan";
-        format = "[$symbol nix]($style) ";
-      };
-      
-      # Language versions - only show when in relevant projects
-      # They appear on the right side of the terminal
-      right_format = "$cmd_duration$nodejs$python$rust";
-      
-      nodejs = {
-        symbol = "";
-        style = "green";
-        format = "[$symbol $version]($style)";
-        detect_extensions = ["js" "mjs" "cjs" "ts" "tsx"];
-        detect_files = ["package.json"];
-      };
-      
-      python = {
-        symbol = "";
-        style = "yellow";
-        format = "[$symbol $version]($style)";
-        detect_extensions = ["py"];
-        detect_files = ["requirements.txt" "pyproject.toml" "Pipfile"];
-      };
-      
-      rust = {
-        symbol = "";
-        style = "orange";
-        format = "[$symbol $version]($style)";
-        detect_extensions = ["rs"];
-        detect_files = ["Cargo.toml"];
-      };
-      
-      # Show command duration for long commands
-      cmd_duration = {
-        min_time = 3000;  # Show after 3 seconds
-        style = "yellow";
-        format = "[$duration]($style) ";
-      };
-      
-      # Disable modules we don't need
-      aws = { disabled = true; };
-      gcloud = { disabled = true; };
-      package = { disabled = true; };
-      time = { disabled = true; };
-      battery = { disabled = true; };
-      memory_usage = { disabled = true; };
-      username = { disabled = true; };
-      hostname = { disabled = true; };
-    };
+    settings = lib.mkMerge [
+      (builtins.fromTOML (builtins.readFile "${pkgs.starship}/share/starship/presets/pure-preset.toml")) {
+        # Custom config here
+        aws.disabled = true;
+      }
+    ];
   };
   
   # Direnv (which you already use)
