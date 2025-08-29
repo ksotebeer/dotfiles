@@ -36,6 +36,9 @@
       
       # Faster git
       core.fsmonitor = true;
+
+      # Edit with vim
+      core.editor = "vim";
       
       # Use native keychain for credentials on macOS
       credential.helper = lib.mkIf pkgs.stdenv.isDarwin "osxkeychain";

@@ -107,6 +107,7 @@
           "raycast"
           "vlc"
           "iterm2"
+          "docker"
         ];
       };
 
