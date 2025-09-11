@@ -69,16 +69,48 @@
       
       -- Theme is loaded in plugins.nix
       
-      -- Essential keymaps only
+      -- Navigation is handled by vim-tmux-navigator plugin
+      -- The plugin automatically sets up Ctrl+hjkl for seamless navigation
       
-      -- Better escape
-      vim.keymap.set("i", "jk", "<ESC>")
-      
-      -- Move between windows
-      vim.keymap.set("n", "<C-h>", "<C-w>h")
-      vim.keymap.set("n", "<C-j>", "<C-w>j")
-      vim.keymap.set("n", "<C-k>", "<C-w>k")
-      vim.keymap.set("n", "<C-l>", "<C-w>l")
+      -- Window resize mode: Press <leader>r then use hjkl repeatedly
+      -- Press Esc or any other key to exit resize mode
+      -- Uses tmux-style directional resizing (h/l move vertical split, j/k move horizontal split)
+      vim.keymap.set("n", "<leader>r", function()
+        print("Resize mode: use hjkl to resize, Esc to exit")
+        local key = vim.fn.getchar()
+        while key ~= 27 do -- 27 is Esc
+          if key == 104 then -- h (move vertical split left)
+            if vim.fn.winnr() == vim.fn.winnr('l') then
+              vim.cmd("vertical resize +3")
+            else
+              vim.cmd("vertical resize -3")
+            end
+          elseif key == 108 then -- l (move vertical split right)
+            if vim.fn.winnr() == vim.fn.winnr('l') then
+              vim.cmd("vertical resize -3")
+            else
+              vim.cmd("vertical resize +3")
+            end
+          elseif key == 106 then -- j (move horizontal split down)
+            if vim.fn.winnr() == vim.fn.winnr('j') then
+              vim.cmd("resize -3")
+            else
+              vim.cmd("resize +3")
+            end
+          elseif key == 107 then -- k (move horizontal split up)
+            if vim.fn.winnr() == vim.fn.winnr('j') then
+              vim.cmd("resize +3")
+            else
+              vim.cmd("resize -3")
+            end
+          else
+            break
+          end
+          vim.cmd("redraw")
+          key = vim.fn.getchar()
+        end
+        print("") -- Clear the message
+      end, { desc = "Enter resize mode" })
       
       -- Quick save/quit
       vim.keymap.set("n", "<leader>w", ":w<CR>")

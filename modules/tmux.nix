@@ -34,12 +34,23 @@
       unbind '"'
       unbind %
 
-      # Switch panes using vim navigation bindings
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
+      # Smart pane switching with awareness of Vim splits
+      # This works with vim-tmux-navigator plugin
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+          | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?|fzf)(diff)?$'"
+      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
+      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
+      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
+      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
 
+      # Restore clear screen with prefix + C-l
+      bind C-l send-keys 'C-l'
+
+      # Resize with Option + hjkl
+      bind-key -n M-h resize-pane -L 2
+      bind-key -n M-j resize-pane -D 2
+      bind-key -n M-k resize-pane -U 2
+      bind-key -n M-l resize-pane -R 2
     '';
   };
 }

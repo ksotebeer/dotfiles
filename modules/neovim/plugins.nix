@@ -110,6 +110,9 @@
           require('nvim-autopairs').setup()
         '';
       }
+      
+      # Seamless navigation between tmux panes and vim splits
+      vim-tmux-navigator
     ];
   };
 }

@@ -102,12 +102,11 @@
         # Add your homebrew casks here
         casks = [
           # Example: "firefox"
-          "chromium"
           "logitech-options"
           "raycast"
           "vlc"
           "iterm2"
-          "docker"
+          "google-chrome"
         ];
       };
 
