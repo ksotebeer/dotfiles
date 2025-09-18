@@ -14,7 +14,6 @@
         plugin = onedark-nvim;
         type = "lua";
         config = ''
-          -- Simple catppuccin setup
           vim.cmd.colorscheme("onedark")
         '';
       }
@@ -90,6 +89,7 @@
         type = "lua";
         config = ''
           require('gitsigns').setup()
+          vim.keymap.set('n', '<leader>gb', ':Gitsigns blame_line<CR>')
         '';
       }
       
