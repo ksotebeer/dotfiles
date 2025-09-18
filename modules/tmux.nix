@@ -18,6 +18,9 @@
     
     # Don't rename windows automatically
     disableConfirmationPrompt = false;
+
+    # No timeout when esc is pressed - nice for vim
+    escapeTime = 0;
     
     # Base configuration
     extraConfig = ''
