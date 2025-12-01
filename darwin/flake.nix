@@ -107,6 +107,7 @@
           "vlc"
           "iterm2"
           "google-chrome"
+          "windows-app"
         ];
       };
 

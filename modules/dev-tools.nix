@@ -19,6 +19,7 @@
     # Development tools
     nodejs_22     # Node.js (needed for claude and other tools)
     gh            # GitHub CLI
+    uv            # Python package manager
     
     # Nix tools
     nix-tree      # Visualize nix dependencies
