@@ -34,6 +34,9 @@
     # Archive tools
     unzip
     zip
+
+    # Media tools 
+    ffmpeg_7
   ];
   
   # Configure some of these tools

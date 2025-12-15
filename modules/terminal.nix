@@ -37,6 +37,11 @@
       v = "nvim";
       vim = "nvim";
     };
+
+    # vi mode plugin for zsh
+    initExtra = ''
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    '';
     
     # Keep your direnv plugin functionality
     initContent = ''
