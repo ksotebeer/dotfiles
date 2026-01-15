@@ -38,13 +38,10 @@
       vim = "nvim";
     };
 
-    # vi mode plugin for zsh
-    initExtra = ''
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-    '';
-    
-    # Keep your direnv plugin functionality
     initContent = ''
+      # vi mode plugin for zsh
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
       # Better history (from oh-my-zsh)
       export HISTSIZE=10000
       export SAVEHIST=10000
@@ -64,6 +61,10 @@
       # Set default editor to neovim
       export EDITOR='nvim'
       export VISUAL='nvim'
+
+      # Conditional starship init to avoid FUNCNEST error with vi mode
+      # xref: https://github.com/starship/starship/issues/3418
+      type starship_zle-keymap-select >/dev/null || eval "$(starship init zsh)"
     '';
     
     # oh-my-zsh handled these, but we need them without it
@@ -73,6 +74,7 @@
   # Starship prompt - Minimal Pure-inspired config
   programs.starship = {
     enable = true;
+    enableZshIntegration = false;  # Disable auto-init, we'll do it conditionally
     settings = lib.mkMerge [
       (builtins.fromTOML (builtins.readFile "${pkgs.starship}/share/starship/presets/pure-preset.toml")) {
         # Custom config here

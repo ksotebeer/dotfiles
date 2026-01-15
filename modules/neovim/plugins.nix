@@ -113,6 +113,9 @@
       
       # Seamless navigation between tmux panes and vim splits
       vim-tmux-navigator
+
+      # Easily change "surroundings" (parentheses, brackets, quotes, etc)
+      vim-surround
     ];
   };
 }
